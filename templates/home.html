@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TapSearch</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src={{ url_for('static', filename='main.js') }}></script>
+    <style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h3 class="text-muted">TapSearch</h3>
+        </div>
+
+        <form role="form" id="createform" method="post" onsubmit="return false;" >
+
+
+            <!-- Form Name -->
+            <legend>Enter text</legend>
+
+
+            <!-- Textarea -->
+            <div class="form-group">
+
+                <textarea class="form-control" id="text" name="inputDescription" placeholder="Start typing or copy and paste your document here..."></textarea>
+
+            </div>
+
+
+            <!-- Button -->
+            <div class="form-group">
+
+                <p>
+                    <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Create Index" />
+                    <span id="results"></span>
+
+
+
+                </p>
+
+            </div>
+
+            </form>
+
+
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+
+            <fieldset>
+                <legend>Select file(s)</legend>
+                <p id="msg"></p>
+                <input name="files[]" id="multiFiles" type="file" multiple="multilple"/>
+            </fieldset>
+             <fieldset>
+                <br>
+                 <button id="upload-file-btn" class="btn btn-primary" type="button">Upload</button>
+            </fieldset>
+            </form>
+            <hr>
+            <p>
+            <button id="clearbutton" class="btn btn-primary" value="Clear Indexes">Clear Indexes </button>
+                    <span id="clear_index"></span>
+            <br>
+            </p>
+
+
+
+            <form role="form" id="searchform" method="get" onsubmit="return false;" >
+
+            <!-- Form Name -->
+            <legend>Search</legend>
+
+
+            <!-- Textarea -->
+            <div class="form-group">
+
+                <input class="form-control" name="text_search" name="search"></input>
+
+            </div>
+
+
+            <!-- Button -->
+            <div class="form-group">
+
+                <p class="text-center">
+                    <input id="button" name="button" class="btn btn-primary" type="submit" value="Search" />
+                    <span id="result"></span>
+                </p>
+
+            </div>
+
+
+        </form>
+
+
+
+
+
+    </div>
+</body>
+
+</html>
