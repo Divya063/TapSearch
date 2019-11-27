@@ -31,15 +31,15 @@ class Index:
         if word not in self.index.keys():
             return None
 
-        return {"para": [self.documents.get(id, None) for id in self.index.get(word)]}
+        return {"paragraph": [self.documents.get(id, None) for id in self.index.get(word)]}
 
     def add(self, document):
         """
         Add a document string to the index
         """
 
+        # split at '\n\n' or '\n \n'
         paragraphs = re.split('\n\s*\n', document)
-        print(paragraphs)
         for paragraph in paragraphs:
             try:
                 for token in [t.lower() for t in nltk.word_tokenize(paragraph)]:

@@ -2,7 +2,7 @@ import json
 import os
 from flask import Flask, request, Response, render_template, jsonify
 from logic import Index
-from werkzeug.utils import secure_filename
+from pdftotext import convert
 
 invert_index = Index()
 
@@ -10,6 +10,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/download'
 ALLOWED_EXTENSIONS = {'txt', 'pdf'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+port = int(os.environ.get("PORT", 5000))
 
 
 def allowed_file(filename):
@@ -29,12 +30,13 @@ def create_index():
         if 'files[]' in request.files:
             files = request.files.getlist('files[]')
             for file in files:
+                # checks if the file is pdf
                 if check_pdf(file.filename):
                     directory_path = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
                     path = os.path.join(directory_path, file.filename)
                     file.save(path)
+                    # convert pdf to text
                     req_data = convert(path)
-                    print(req_data)
                 else:
                     if allowed_file(file.filename):
                         req_data = file.read().decode("utf-8")
@@ -43,7 +45,6 @@ def create_index():
                         return jsonify(msg), 400
 
         result = invert_index.add(req_data)
-        print(len(result['item']))
         if result is None:
             response = {"response": "Index not created"}
             return response, 400
@@ -79,4 +80,5 @@ def clean_index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True,host='0.0.0.0',port=port)

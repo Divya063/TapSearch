@@ -1,3 +1,4 @@
 PyMuPDF
 flask
 nltk
+singledispatch

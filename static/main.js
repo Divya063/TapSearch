@@ -1,16 +1,11 @@
 $(document).ready(function() {
   console.log("ready!");
 
-
-//$('#clearbutton').hide();
-
 $(function() {
     $('#upload-file-btn').click(function() {
 
         var form_data = new FormData();
         var number = document.getElementById('multiFiles').files.length;
-        console.log(number)
-        //path = document.getElementById('multiFiles').value
         for(var index=0; index<number; index++){
             form_data.append("files[]", document.getElementById('multiFiles').files[index])
         }
@@ -21,28 +16,25 @@ $(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function(response) {
                 $('#msg').html(number + " document(s) uploaded!")
                 console.log('Success!');
-                path = null;
             },
 
-            error: function(data) {
+            error: function(response) {
                 $('#msg').html("Upload only PDF or text files")
-                console.log(data);
+                console.log(response);
             },
         });
     });
 });
 
-$('#createform').on('submit', function() {
+$('#createindex').on('submit', function() {
 
-    console.log("the form has been submitted");
+    console.log("The text has been submitted");
 
     // grab values
     paragraphs = $("textarea#text").val();
-    console.log(paragraphs)
-
 
     $.ajax({
       type: "POST",
@@ -67,8 +59,6 @@ $('#searchform').on('submit', function() {
 
     // grab values
     word = $("input[name='text_search']").val();
-    console.log(word)
-
 
     $.ajax({
       type: "GET",
@@ -78,7 +68,7 @@ $('#searchform').on('submit', function() {
         $("#result").html(" ")
         console.log(results);
         var count = 0;
-        $.each(results.para, function(index, value){
+        $.each(results.paragraph, function(index, value){
             if(count<10){
                 count++;
                 $("#result").append('<hr>' + '<center>' + count + '</center>' + '<br>' +  value + '<br>' + '<hr>');
