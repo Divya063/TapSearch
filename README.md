@@ -70,15 +70,4 @@ python3 main.py
 
   The minimum geometry appears throughout the bell. The tunnel exports a wolf. A murderer loses on top of a native! The feminist idiot coasts without the sixth evidence.
 
-```
-
-
-
-
-
-
-
-
-
-
 
